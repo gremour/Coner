@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dcincm1y4yein"]
+
+[ext_resource type="FontFile" uid="uid://cd3awxdg5p1h7" path="res://art/DragonHunter-9Ynxj.otf" id="1_mnvml"]
+
+[resource]
+default_font = ExtResource("1_mnvml")
+default_font_size = 48

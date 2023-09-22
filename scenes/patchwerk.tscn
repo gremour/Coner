@@ -1,0 +1,124 @@
+[gd_scene load_steps=18 format=3 uid="uid://75r8wa31juhi"]
+
+[ext_resource type="Script" path="res://scenes/Patchwerk.gd" id="1_jr267"]
+[ext_resource type="Texture2D" uid="uid://c8ickbtjx73vh" path="res://art/abom.png" id="2_mley1"]
+[ext_resource type="Texture2D" uid="uid://bx88tspxvi1vc" path="res://art/chain.png" id="3_uo1yx"]
+[ext_resource type="Script" path="res://scenes/Hook.gd" id="4_jqrwd"]
+[ext_resource type="Texture2D" uid="uid://b5iymhek3qn37" path="res://art/hook.png" id="5_gosje"]
+[ext_resource type="AudioStream" uid="uid://brvbblnkcc6bs" path="res://sound/AbominationPissed5.ogg" id="6_5dglj"]
+[ext_resource type="AudioStream" uid="uid://hfqfcnack0cc" path="res://sound/FleshGolemWoundCritA.ogg" id="7_fjgrf"]
+[ext_resource type="AudioStream" uid="uid://bofpxijlybo61" path="res://sound/MON_UnboundAbomination_Death02.ogg" id="8_ke7lt"]
+[ext_resource type="AudioStream" uid="uid://ckpx0wkci6omu" path="res://sound/FleshGolemAttackD.ogg" id="9_4b5t8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6enbp"]
+atlas = ExtResource("2_mley1")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v6ni8"]
+atlas = ExtResource("2_mley1")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_db04w"]
+atlas = ExtResource("2_mley1")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnwmk"]
+atlas = ExtResource("2_mley1")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1oub"]
+atlas = ExtResource("2_mley1")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6y410"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6enbp")
+}],
+"loop": true,
+"name": &"hook",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v6ni8")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_db04w")
+}],
+"loop": true,
+"name": &"troll",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nnwmk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r1oub")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kgw55"]
+radius = 37.6431
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lxgib"]
+
+[node name="Patchwerk" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_jr267")
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_6y410")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_kgw55")
+
+[node name="ChainSpot" type="Marker2D" parent="."]
+position = Vector2(7, -5)
+
+[node name="Chain" type="Line2D" parent="."]
+texture_repeat = 2
+points = PackedVector2Array(0, 0, 0, 0)
+width = 16.0
+texture = ExtResource("3_uo1yx")
+
+[node name="Hook" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 11
+script = ExtResource("4_jqrwd")
+
+[node name="Sprite2D" type="Sprite2D" parent="Hook"]
+texture = ExtResource("5_gosje")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hook"]
+visible = false
+shape = SubResource("CircleShape2D_lxgib")
+
+[node name="EnterSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_5dglj")
+
+[node name="WoundSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_fjgrf")
+
+[node name="DeadSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_ke7lt")
+
+[node name="HookSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_4b5t8")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_entered" from="Hook" to="Hook" method="_on_area_entered"]
+[connection signal="hit" from="Hook" to="." method="_on_hook_hit"]
+[connection signal="returned" from="Hook" to="." method="_on_hook_returned"]
