@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bisvlvyqdhv24"]
+[gd_scene load_steps=22 format=3 uid="uid://bisvlvyqdhv24"]
 
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_vg2yb"]
 [ext_resource type="Texture2D" uid="uid://btbtgw0qbbdfg" path="res://art/back.png" id="1_w630v"]
@@ -7,7 +7,9 @@
 [ext_resource type="Script" path="res://scenes/Coner.gd" id="2_ppjf5"]
 [ext_resource type="Texture2D" uid="uid://c8xeufjyewx3b" path="res://art/coner.png" id="2_v6idl"]
 [ext_resource type="Theme" uid="uid://dcincm1y4yein" path="res://themes/theme.tres" id="8_78b1p"]
+[ext_resource type="Texture2D" uid="uid://tfsft07d1fqe" path="res://art/button.png" id="9_slqtw"]
 [ext_resource type="AudioStream" uid="uid://c5kdfg3ukk21h" path="res://sound/DwarfMaleMainDeathA.ogg" id="10_dp027"]
+[ext_resource type="FontFile" uid="uid://cd3awxdg5p1h7" path="res://art/DragonHunter-9Ynxj.otf" id="10_tpjda"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ie3j"]
 atlas = ExtResource("2_v6idl")
@@ -88,6 +90,10 @@ font_color = Color(0.698039, 1, 0.105882, 1)
 outline_size = 6
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_x5jtw"]
+font = ExtResource("10_tpjda")
+font_size = 32
+
 [node name="World" type="Node2D"]
 script = ExtResource("1_vg2yb")
 
@@ -142,12 +148,11 @@ stream = ExtResource("10_dp027")
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="GameOver" type="Label" parent="UI"]
-unique_name_in_owner = true
 visible = false
-offset_left = 258.0
-offset_top = 84.0
-offset_right = 666.0
-offset_bottom = 250.0
+offset_left = 257.0
+offset_top = 44.0
+offset_right = 665.0
+offset_bottom = 210.0
 theme = ExtResource("8_78b1p")
 text = "Coner is DEAD
 GAME OVER"
@@ -156,12 +161,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Score" type="Label" parent="UI"]
-unique_name_in_owner = true
 visible = false
-offset_left = 246.0
-offset_top = 253.0
-offset_right = 654.0
-offset_bottom = 419.0
+offset_left = 252.0
+offset_top = 192.0
+offset_right = 660.0
+offset_bottom = 358.0
 theme = ExtResource("8_78b1p")
 text = "Score"
 label_settings = SubResource("LabelSettings_mpjml")
@@ -169,7 +173,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Played" type="Label" parent="UI"]
-unique_name_in_owner = true
 offset_left = 23.0
 offset_top = 18.0
 offset_right = 63.0
@@ -178,4 +181,46 @@ theme = ExtResource("8_78b1p")
 text = "0:00"
 label_settings = SubResource("LabelSettings_lwr06")
 
+[node name="AgainButton" type="TextureButton" parent="UI"]
+visible = false
+offset_left = 225.0
+offset_top = 328.0
+offset_right = 455.0
+offset_bottom = 409.0
+texture_normal = ExtResource("9_slqtw")
+texture_pressed = ExtResource("9_slqtw")
+
+[node name="Label" type="Label" parent="UI/AgainButton"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 17.0
+offset_right = 206.0
+offset_bottom = 65.0
+text = "Again"
+label_settings = SubResource("LabelSettings_x5jtw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitButton" type="TextureButton" parent="UI"]
+visible = false
+offset_left = 477.0
+offset_top = 327.0
+offset_right = 707.0
+offset_bottom = 408.0
+texture_normal = ExtResource("9_slqtw")
+texture_pressed = ExtResource("9_slqtw")
+
+[node name="Label" type="Label" parent="UI/ExitButton"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 18.0
+offset_right = 210.0
+offset_bottom = 66.0
+text = "No, thanks!"
+label_settings = SubResource("LabelSettings_x5jtw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="finished" from="BackgroundMusic" to="." method="_on_background_music_finished"]
+[connection signal="pressed" from="UI/AgainButton" to="." method="_on_again_button_pressed"]
+[connection signal="pressed" from="UI/ExitButton" to="." method="_on_exit_button_pressed"]

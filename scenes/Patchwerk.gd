@@ -3,11 +3,13 @@ extends Area2D
 var speed = 50
 var hook_cooldown = 5
 var max_hook_cooldown = 5
-
+var fading = false
+var fading_time = 1.0
 var hooking = false
 var viewport
 
 signal kill()
+signal died()
 
 func _ready():
 	viewport = get_viewport_rect()
@@ -32,12 +34,19 @@ func _ready():
 	$EnterSound.play()
 
 func _process(delta):
-	var world = get_node("/root/World")
-	if world.game_over:
+	if fading:
+		fading_time -= delta
+		modulate.a = fading_time
+		if fading_time <= 0:
+			died.emit()
+			queue_free()
+
+	var world = get_node("/root/Game/World")
+	if world.game_over or fading:
 		$Animation.play("idle")
 		return
 
-	var coner = get_node("/root/World/Coner")
+	var coner = get_node("/root/Game/World/Coner")
 	var move_dir: Vector2 = (coner.position - Vector2(0, 24) - position)
 	var dir: Vector2 = (coner.position - position)
 
@@ -56,6 +65,9 @@ func _process(delta):
 
 		if move_dir.length() < 4:
 			move_dir = Vector2.ZERO
+		else:
+			$Animation.play('walk')
+
 		move_dir = move_dir.normalized()
 
 		if move_dir.x < 0:
@@ -71,8 +83,13 @@ func _on_hook_hit():
 func _on_hook_returned():
 	hooking = false
 	hook_cooldown = max_hook_cooldown
-	$Animation.play("walk")
 
 func _on_area_entered(_area):
+	if fading:
+		return
 	kill.emit()
 
+func spore_buff():
+	fading = true
+	
+	

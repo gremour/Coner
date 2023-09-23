@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bif1ciecn135h"]
+
+[ext_resource type="Script" path="res://Ring.gd" id="1_d2kcd"]
+[ext_resource type="Texture2D" uid="uid://b0k6rnn1u85bg" path="res://art/fire-ring.png" id="2_rntoy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kjsd6"]
+
+[node name="Ring" type="Area2D"]
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("1_d2kcd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_rntoy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kjsd6")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

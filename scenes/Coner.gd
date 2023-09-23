@@ -3,7 +3,8 @@ extends Area2D
 var speed = 200
 var viewport
 var viewport_margin = 40
-
+var spore_buff_durtation = 0
+var max_spore_buff_duration = 5
 var dead = false
 
 # Called when the node enters the scene tree for the first time.
@@ -16,6 +17,8 @@ func _ready():
 func _process(delta):
 	if dead:
 		return
+	
+	spore_buff_durtation -= delta
 	
 	var dirx = Input.get_axis("move_left", "move_right")
 	var diry = Input.get_axis("move_up", "move_down")
@@ -40,13 +43,15 @@ func _process(delta):
 		$Animation.play("idle")
 
 	var dir = Vector2(dirx, diry).normalized()
-	position += dir * speed * delta
-
+	var cur_speed = speed * (1.0 if spore_buff_durtation <= 0 else 1.5)
+	position += dir * cur_speed * delta
 
 func _on_patchwerk_kill():
-	print("Coner is killed")
 	$Blood.emitting = true
 	$Blood.one_shot = true
 	$DeathSound.play()
 	dead = true
 	$Animation.play("dead")
+
+func spore_buff():
+	spore_buff_durtation = max_spore_buff_duration
