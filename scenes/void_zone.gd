@@ -2,12 +2,13 @@ extends Area2D
 
 var lifetime = 0.0
 var ttl = 2.0
-var coner_inside = true
+var coner_inside = false
 
 signal kill()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	z_index = -1
 	modulate.a = 0
 	$AnimatedSprite2D.play("default")
 

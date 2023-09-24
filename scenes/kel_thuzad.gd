@@ -55,7 +55,8 @@ func _process(delta):
 			max_cast_cooldown = min_cast_cooldown
 		$Animation.play("cast")
 		$CastTimer.start()
-		spawn_void_zone.emit(coner.position)
+		var zone_pos = Vector2(randf() * (viewport.size.x - 60) + 30, randf() * (viewport.size.y - 60) + 30)
+		spawn_void_zone.emit(zone_pos)
 
 	var move_dir: Vector2 = (coner.position - Vector2(0, 24) - position)
 	move_dir = move_dir.normalized()
