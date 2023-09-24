@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bisvlvyqdhv24"]
+[gd_scene load_steps=29 format=3 uid="uid://bisvlvyqdhv24"]
 
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_vg2yb"]
 [ext_resource type="Texture2D" uid="uid://btbtgw0qbbdfg" path="res://art/back.png" id="1_w630v"]
@@ -6,36 +6,37 @@
 [ext_resource type="AudioStream" uid="uid://e7iu3jgh7llb" path="res://sound/PAT_NAXX_AGGRO01.ogg" id="2_53ro4"]
 [ext_resource type="Script" path="res://scenes/Coner.gd" id="2_ppjf5"]
 [ext_resource type="Texture2D" uid="uid://c8xeufjyewx3b" path="res://art/coner.png" id="2_v6idl"]
+[ext_resource type="Texture2D" uid="uid://bdf32flchglkv" path="res://art/artney.png" id="6_d8m6v"]
 [ext_resource type="Theme" uid="uid://dcincm1y4yein" path="res://themes/theme.tres" id="8_78b1p"]
 [ext_resource type="Texture2D" uid="uid://tfsft07d1fqe" path="res://art/button.png" id="9_slqtw"]
 [ext_resource type="AudioStream" uid="uid://c5kdfg3ukk21h" path="res://sound/DwarfMaleMainDeathA.ogg" id="10_dp027"]
 [ext_resource type="FontFile" uid="uid://cd3awxdg5p1h7" path="res://art/DragonHunter-9Ynxj.otf" id="10_tpjda"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2ie3j"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rq0d"]
 atlas = ExtResource("2_v6idl")
 region = Rect2(288, 0, 96, 96)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6umvv"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_b7tou"]
 atlas = ExtResource("2_v6idl")
 region = Rect2(0, 0, 96, 96)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8menb"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4dk8r"]
 atlas = ExtResource("2_v6idl")
 region = Rect2(0, 0, 96, 96)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_a5h7r"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyvda"]
 atlas = ExtResource("2_v6idl")
 region = Rect2(96, 0, 96, 96)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rdbet"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_8s6ar"]
 atlas = ExtResource("2_v6idl")
 region = Rect2(192, 0, 96, 96)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_xi73f"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_ljobv"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2ie3j")
+"texture": SubResource("AtlasTexture_0rq0d")
 }],
 "loop": true,
 "name": &"dead",
@@ -43,7 +44,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6umvv")
+"texture": SubResource("AtlasTexture_b7tou")
 }],
 "loop": true,
 "name": &"idle",
@@ -51,13 +52,66 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8menb")
+"texture": SubResource("AtlasTexture_4dk8r")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_a5h7r")
+"texture": SubResource("AtlasTexture_eyvda")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rdbet")
+"texture": SubResource("AtlasTexture_8s6ar")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o8crg"]
+atlas = ExtResource("6_d8m6v")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6hmxe"]
+atlas = ExtResource("6_d8m6v")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0vi3"]
+atlas = ExtResource("6_d8m6v")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_euel7"]
+atlas = ExtResource("6_d8m6v")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42s3h"]
+atlas = ExtResource("6_d8m6v")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xi73f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o8crg")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6hmxe")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0vi3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_euel7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42s3h")
 }],
 "loop": true,
 "name": &"run",
@@ -99,11 +153,11 @@ script = ExtResource("1_vg2yb")
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_0sx0p")
-autoplay = true
+volume_db = -15.0
 
 [node name="BeginSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_53ro4")
-autoplay = true
+volume_db = -15.0
 
 [node name="Back" type="Sprite2D" parent="."]
 position = Vector2(454, 76)
@@ -116,10 +170,17 @@ texture = ExtResource("1_w630v")
 collision_mask = 8
 script = ExtResource("2_ppjf5")
 
-[node name="Animation" type="AnimatedSprite2D" parent="Coner"]
+[node name="AnimationConer" type="AnimatedSprite2D" parent="Coner"]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_ljobv")
+animation = &"idle"
+
+[node name="AnimationArtney" type="AnimatedSprite2D" parent="Coner"]
+visible = false
+position = Vector2(8, -9)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_xi73f")
-animation = &"dead"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Coner"]
 visible = false
@@ -144,11 +205,11 @@ color = Color(0.662745, 0, 0, 1)
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="Coner"]
 stream = ExtResource("10_dp027")
+volume_db = -10.0
 
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="GameOver" type="Label" parent="UI"]
-visible = false
 offset_left = 257.0
 offset_top = 44.0
 offset_right = 665.0
@@ -161,7 +222,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Score" type="Label" parent="UI"]
-visible = false
 offset_left = 252.0
 offset_top = 192.0
 offset_right = 660.0
@@ -181,32 +241,49 @@ theme = ExtResource("8_78b1p")
 text = "0:00"
 label_settings = SubResource("LabelSettings_lwr06")
 
-[node name="AgainButton" type="TextureButton" parent="UI"]
-visible = false
-offset_left = 225.0
-offset_top = 328.0
-offset_right = 455.0
-offset_bottom = 409.0
+[node name="ConerButton" type="TextureButton" parent="UI"]
+offset_left = 75.0
+offset_top = 330.0
+offset_right = 305.0
+offset_bottom = 411.0
 texture_normal = ExtResource("9_slqtw")
 texture_pressed = ExtResource("9_slqtw")
 
-[node name="Label" type="Label" parent="UI/AgainButton"]
+[node name="Label" type="Label" parent="UI/ConerButton"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 17.0
 offset_right = 206.0
 offset_bottom = 65.0
-text = "Again"
+text = "Coner"
+label_settings = SubResource("LabelSettings_x5jtw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArtneyButton" type="TextureButton" parent="UI"]
+offset_left = 310.0
+offset_top = 330.0
+offset_right = 540.0
+offset_bottom = 411.0
+texture_normal = ExtResource("9_slqtw")
+texture_pressed = ExtResource("9_slqtw")
+
+[node name="Label" type="Label" parent="UI/ArtneyButton"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 17.0
+offset_right = 206.0
+offset_bottom = 65.0
+text = "Artney"
 label_settings = SubResource("LabelSettings_x5jtw")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ExitButton" type="TextureButton" parent="UI"]
-visible = false
-offset_left = 477.0
-offset_top = 327.0
-offset_right = 707.0
-offset_bottom = 408.0
+offset_left = 545.0
+offset_top = 330.0
+offset_right = 775.0
+offset_bottom = 411.0
 texture_normal = ExtResource("9_slqtw")
 texture_pressed = ExtResource("9_slqtw")
 
@@ -222,5 +299,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="finished" from="BackgroundMusic" to="." method="_on_background_music_finished"]
-[connection signal="pressed" from="UI/AgainButton" to="." method="_on_again_button_pressed"]
+[connection signal="pressed" from="UI/ConerButton" to="." method="_on_coner_button_pressed"]
+[connection signal="pressed" from="UI/ArtneyButton" to="." method="_on_artney_button_pressed"]
 [connection signal="pressed" from="UI/ExitButton" to="." method="_on_exit_button_pressed"]

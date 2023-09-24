@@ -7,6 +7,8 @@ var spore_buff_durtation = 0
 var max_spore_buff_duration = 5
 var dead = false
 
+var animation
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	viewport = get_viewport_rect()
@@ -33,25 +35,35 @@ func _process(delta):
 		diry = 0
 
 	if dirx < 0:
-		$Animation.flip_h = true
+		animation.flip_h = true
 	elif dirx > 0:
-		$Animation.flip_h = false
+		animation.flip_h = false
 	
 	if dirx != 0 or diry != 0:
-		$Animation.play("run")
+		animation.play("run")
 	else:
-		$Animation.play("idle")
+		animation.play("idle")
 
 	var dir = Vector2(dirx, diry).normalized()
 	var cur_speed = speed * (1.0 if spore_buff_durtation <= 0 else 1.5)
 	position += dir * cur_speed * delta
+
+func setup(character: int):
+	if character == 0:
+		animation = $AnimationConer
+		$AnimationConer.visible = true
+		$AnimationArtney.visible = false
+	else:
+		animation = $AnimationArtney
+		$AnimationConer.visible = false
+		$AnimationArtney.visible = true
 
 func _on_patchwerk_kill():
 	$Blood.emitting = true
 	$Blood.one_shot = true
 	$DeathSound.play()
 	dead = true
-	$Animation.play("dead")
+	animation.play("dead")
 
 func spore_buff():
 	spore_buff_durtation = max_spore_buff_duration

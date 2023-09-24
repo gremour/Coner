@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://v8fefrv8oqug"]
+
+[ext_resource type="Texture2D" uid="uid://cxmiq0plf6uhy" path="res://art/voidz.png" id="1_524lf"]
+[ext_resource type="Script" path="res://scenes/void_zone.gd" id="1_h3poa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phpvw"]
+atlas = ExtResource("1_524lf")
+region = Rect2(0, 0, 384, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p0fp6"]
+atlas = ExtResource("1_524lf")
+region = Rect2(384, 0, 384, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d7p87"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_phpvw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p0fp6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nop8w"]
+radius = 19.0
+height = 120.0
+
+[node name="VoidZone" type="Area2D"]
+collision_layer = 16
+script = ExtResource("1_h3poa")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-3, -8)
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_d7p87")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_nop8w")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

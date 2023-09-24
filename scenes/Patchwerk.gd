@@ -91,5 +91,5 @@ func _on_area_entered(_area):
 
 func spore_buff():
 	fading = true
-	
+	$DeadSound.play()
 	

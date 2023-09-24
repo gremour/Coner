@@ -1,0 +1,70 @@
+[gd_scene load_steps=10 format=3 uid="uid://dybqq3u485fot"]
+
+[ext_resource type="Script" path="res://scenes/kel_thuzad.gd" id="1_4h2hg"]
+[ext_resource type="Texture2D" uid="uid://mgq0g67f1ly7" path="res://art/kel.png" id="1_ypehd"]
+[ext_resource type="AudioStream" uid="uid://5a5sl6mao5q7" path="res://sound/KEL_NAXX_SLAY02.ogg" id="3_whtda"]
+[ext_resource type="AudioStream" uid="uid://cu6x3ba3t6u33" path="res://sound/KEL_NAXX_AGGRO01.ogg" id="4_1t2kb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wlxcc"]
+atlas = ExtResource("1_ypehd")
+region = Rect2(280, 0, 140, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kgjo5"]
+atlas = ExtResource("1_ypehd")
+region = Rect2(0, 0, 140, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yvjvp"]
+atlas = ExtResource("1_ypehd")
+region = Rect2(140, 0, 140, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gaweo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wlxcc")
+}],
+"loop": true,
+"name": &"cast",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kgjo5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yvjvp")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1yb5h"]
+radius = 26.9258
+
+[node name="KelThuzad" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_4h2hg")
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_gaweo")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 19)
+shape = SubResource("CircleShape2D_1yb5h")
+
+[node name="DeadSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_whtda")
+volume_db = -10.0
+
+[node name="EnterSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_1t2kb")
+volume_db = -10.0
+
+[node name="CastTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="CastTimer" to="." method="_on_cast_timer_timeout"]

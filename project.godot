@@ -62,6 +62,7 @@ menu={
 2d_physics/layer_2="Monsters"
 2d_physics/layer_3="Hook"
 2d_physics/layer_4="Spores"
+2d_physics/layer_5="VoidZones"
 
 [rendering]
 
